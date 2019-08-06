@@ -74,4 +74,17 @@ Có thể chỉnh các thông số
 
 - Giá giới thiệu 
 
+...
+
+### 6. Mô hình tích hợp In-app billing trong ứng dụng
+
+Thông thường flow của thanh toán như sau:
+
+
+<img src="https://developer.android.com/images/google-play-billing/v3/iab_v3_purchase_flow.png">
+
+Bước 1: Gửi purchase token, order id lên Google store.
+
+Bước 2: Lấy thông tin payload về
+
 
