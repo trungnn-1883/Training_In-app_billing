@@ -26,11 +26,11 @@ Có 3 loại
 
 - One-time: mua 1 hoặc nhiều lần, không định kì. Ví dụ như màn chơi, bài hát, film, ...
 
-<img src="https://i.redd.it/ax07ywpytnd21.jpg">
+<img src="https://i.redd.it/ax07ywpytnd21.jpg" width="200">
 
 - Rewarded: yêu cầu người dùng xem quảng cáo video. Sau khi xem người chơi sẽ có thêm mạng, hoàn thành nhanh, vật phẩm mới, ...
 
-<img src="https://newapplift-production.s3.amazonaws.com/comfy/cms/files/files/000/003/415/original/RewardedVideoAd.png">
+<img src="https://newapplift-production.s3.amazonaws.com/comfy/cms/files/files/000/003/415/original/RewardedVideoAd.png" width="200">
 
 - Subscription: yêu cầu người dùng thanh toán định kì, theo tháng, theo quý, năm, ...
 
