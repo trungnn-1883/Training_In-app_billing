@@ -208,12 +208,6 @@ Thông thường flow của thanh toán có server như sau:
 
 2. Google trả về thông tin purchase, trong đó có nhiều thông tin như token, time, order Id, ... thông qua hàm onPurchasesUpdated()
 
-3. Gửi purchase token và chứng chỉ tài khoản người dùng tới server
-
-4. Server request lên Google Play, gửi theo package name, product ID và purchase token, để nhận về purchase detail
-
-5. Server nhận về purchase detail, check order Id nhận được là duy nhất
-
 ```
 {
     "orderId":"1299976316905--.13643659--",
@@ -224,11 +218,19 @@ Thông thường flow của thanh toán có server như sau:
     "purchaseToken":"utfwimslnrr--.AO-J1OwZ4l5oXz_3d2SAWAAUgFE3QErK--IY2p2LnlV4tpH4NITB4mJMX98sC--Izw3tfW_GflJDKFyb-g"
 }
 ```
+
+3. Gửi purchase token và chứng chỉ tài khoản người dùng tới server
+
+4. Server request lên Google Play, gửi theo package name, product ID và purchase token, để nhận về purchase detail
+
+5. Server nhận về purchase detail, check order Id nhận được là duy nhất
+
 6. Server sử dụng chứng chỉ tài khoản người dùng nhận được ở bước 1 để liên kết token vs người sử dụng
 
 => Người dùng giờ có thể sử dụng tính năng
 
 
-### 8. 
+Không có server thì có thể xem tại: https://developer.android.com/google/play/billing/billing_library_overview#Verify-purchase-device
+
 
 
