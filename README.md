@@ -76,15 +76,159 @@ Có thể chỉnh các thông số
 
 ...
 
-### 6. Mô hình tích hợp In-app billing trong ứng dụng
+### 6. Các bước thêm thanh toán vào trong ứng dụng
 
-Thông thường flow của thanh toán như sau:
+**Bước 1**: Thực hiện thêm code Google Billing vào app
+
+- Thêm dependency
+
+```
+  dependencies {
+      ...
+      implementation 'com.android.billingclient:billing:2.0.0'
+  }
+
+```
+
+- Kết nối tới Google Play
+
+```
+ mBillingClient = BillingClient.newBuilder(this).setListener(this).build()
+
+ mBillingClient.startConnection(object : BillingClientStateListener {
+            override fun onBillingSetupFinished(billingResult: BillingResult) {
+                when {
+                    billingResult.responseCode == BillingClient.BillingResponseCode.OK -> {
+                        Toast.makeText(this@MainActivity, "Setup ok", Toast.LENGTH_SHORT).show()
+                    }
+                    else -> Toast.makeText(this@MainActivity, "Setup fail", Toast.LENGTH_SHORT).show()
+
+                }
+            }
+
+            override fun onBillingServiceDisconnected() {
+                Toast.makeText(this@MainActivity, "Setup Disconnected", Toast.LENGTH_SHORT).show()
+
+            }
+
+        })
+```
+- Query sku list, lấy thông tin các product id
+
+Khai báo sku list
+
+```
+ var mListSku = listOf("object_1", "object_2", "object_3", "object_4")
+
+```
+
+Tạo sku param
+
+```
+ mSkuParam = SkuDetailsParams.newBuilder()
+            // list to query
+            .setSkusList(mListSku)
+            .setType(BillingClient.SkuType.INAPP).build()
+```
+
+Gọi hàm để lấy thông tin
+
+```
+    fun onLoadProductClicked() {
+        when (mBillingClient.isReady) {
+            true -> {
+                Toast.makeText(this@MainActivity, "mBillingClient.isReady is true", Toast.LENGTH_SHORT).show()
+                mBillingClient.querySkuDetailsAsync(mSkuParam) { billingResult, skuDetailsList ->
+                    run {
+                        when (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                            true -> {
+                                initProductAdapter(skuDetailsList)
+                            }
+                            false -> Toast.makeText(this@MainActivity, "Query failed", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+            }
+            false -> Toast.makeText(this@MainActivity, "mBillingClient.isReady is false", Toast.LENGTH_SHORT).show()
+        }
+    }
+```
+
+- Mua product 
+
+```
+ val billingFlowParams = BillingFlowParams.newBuilder().setSkuDetails(it).build()
+ mBillingClient.launchBillingFlow(this, billingFlowParams)
+```
+
+- Kết quả thanh toán sẽ trả về qua  PurchasesUpdatedListener, trong phương thức onPurchasesUpdated()
+
+```
+override fun onPurchasesUpdated(responseCode: Int, purchases: MutableList<Purchase>?) {
+    when(responseCode) {
+        BillingClient.BillingResponse.OK -> {
+            purchases?.let {
+                // Handle response success
+            }
+        }
+        BillingClient.BillingResponse.USER_CANCELED -> {
+            // Handle response cancel
+        }
+    }
+}
+```
+Ngoài ra còn có thể hỗ trợ mua sản phẩm bên ngoài app, đính kèm developer payload, ...
 
 
-<img src="https://developer.android.com/images/google-play-billing/v3/iab_v3_purchase_flow.png">
+**Bước 2**: Create file apk/ app bundle
 
-Bước 1: Gửi purchase token, order id lên Google store.
+Build apk, app bundle ở phiên bản release (Build -> Generate Signed Bundle/APK), trong đó chứa quyền Billing
 
-Bước 2: Lấy thông tin payload về
+**Bước 3**: Upload app lên Google Play Console
+
+- Cần có một tài khoản Google Play Console, sau đó làm theo hướng dẫn để publish app. Nên để ở bản alpha, beta hoặc internal test.
+
+**Bước 4**: Chuẩn bị sản phẩm
+
+Tạo các sản phẩm managed product, subscription, rewarded product muốn đưa vào ứng dụng
+
+**Bước 5**: Test Play Billing
+
+Thêm tài khoản Google test (thêm mail) và test trên các thiết bị để tránh bị mất tiền.
+
+
+### 7. Quy trình verify thanh toán
+
+Thông thường flow của thanh toán có server như sau:
+
+<img src="img/b2.png">
+
+1. Gửi request mua hàng tới Google Play, qua hàm launchBillingFlow()
+
+2. Google trả về thông tin purchase, trong đó có nhiều thông tin như token, time, order Id, ... thông qua hàm onPurchasesUpdated()
+
+3. Gửi purchase token và chứng chỉ tài khoản người dùng tới server
+
+4. Server request lên Google Play, gửi theo package name, product ID và purchase token, để nhận về purchase detail
+
+5. Server nhận về purchase detail, check order Id nhận được là duy nhất
+
+```
+{
+    "orderId":"1299976316905--.13643659--",
+    "packageName":"my package name",
+    "productId":"77",
+    "purchaseTime":13662--,
+    "purchaseState":0,
+    "purchaseToken":"utfwimslnrr--.AO-J1OwZ4l5oXz_3d2SAWAAUgFE3QErK--IY2p2LnlV4tpH4NITB4mJMX98sC--Izw3tfW_GflJDKFyb-g"
+}
+```
+6. Server sử dụng chứng chỉ tài khoản người dùng nhận được ở bước 1 để liên kết token vs người sử dụng
+
+=> Người dùng giờ có thể sử dụng tính năng
+
+
+### 8. 
 
 
