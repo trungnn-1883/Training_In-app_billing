@@ -232,5 +232,25 @@ Thông thường flow của thanh toán có server như sau:
 
 Không có server thì có thể xem tại: https://developer.android.com/google/play/billing/billing_library_overview#Verify-purchase-device
 
+### 8. Phương án cho các loại item
+
+* Mua bình máu, mana: loại one-time product, mua nhiều lần, hết lại mua
+
+* Mua giáp: 
+
+- Cách 1: Loại one-time product, mua một lần, dùng mãi, ko bị hỏng 
+
+- Cách 2: Loại one-time product, mua nhiều lần, hỏng phải mua mới
+
+* Mua thêm màn chơi, tính năng: loại one-time, mua một lần, dùng mãi
+
+* Ở các event, có thể cung cấp promo code, giảm giá vật phẩm để thu hút người dùng
+
+* Muốn chơi tiếp khi chết, thêm lượt chơi, có thêm vật phẩm: có thể dùng loại rewarded product
+
+
+
+
+
 
 
