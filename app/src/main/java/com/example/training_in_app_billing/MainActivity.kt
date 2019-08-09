@@ -12,7 +12,6 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
 
     override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
         Toast.makeText(this@MainActivity, "mBillingClient.isReady is false: " + billingResult.responseCode, Toast.LENGTH_SHORT).show()
-purchases[0].
     }
 
 

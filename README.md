@@ -64,6 +64,8 @@ Có thể chỉnh nhiều thông số như:
 
 Promo code: mã giảm giá giúp người dùng có sản phẩm one-time miễn phí. 
 
+<img src="img/b3.png"/>
+
 ### 5. Tùy chọn sản phẩm subscription
 
 Có thể chỉnh các thông số
@@ -75,6 +77,9 @@ Có thể chỉnh các thông số
 - Giá giới thiệu 
 
 ...
+
+<img src="img/b4.png"/>
+
 
 ### 6. Các bước thêm thanh toán vào trong ứng dụng
 
@@ -189,9 +194,15 @@ Build apk, app bundle ở phiên bản release (Build -> Generate Signed Bundle/
 
 - Cần có một tài khoản Google Play Console, sau đó làm theo hướng dẫn để publish app. Nên để ở bản alpha, beta hoặc internal test.
 
+<img src="img/b6.png"/>
+
 **Bước 4**: Chuẩn bị sản phẩm
 
 Tạo các sản phẩm managed product, subscription, rewarded product muốn đưa vào ứng dụng
+
+<img src="img/b3.png"/>
+
+<img src="img/b5.png"/>
 
 **Bước 5**: Test Play Billing
 
