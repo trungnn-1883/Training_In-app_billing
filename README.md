@@ -211,7 +211,7 @@ Thêm tài khoản Google test (thêm mail) và test trên các thiết bị đ�
 
 ### 7. Quy trình verify thanh toán
 
-Thông thường flow của thanh toán có server như sau:
+### Thông thường flow của thanh toán có server như sau:
 
 <img src="img/b2.png">
 
@@ -240,8 +240,23 @@ Thông thường flow của thanh toán có server như sau:
 
 => Người dùng giờ có thể sử dụng tính năng
 
+### Không có server 
 
-Không có server thì có thể xem tại: https://developer.android.com/google/play/billing/billing_library_overview#Verify-purchase-device
+- Để đảm bảo an toàn, Google Play sẽ ký chuỗi JSON phải hồi cho giao dịch mua. Chuỗi này được mã hóa bí mật với cặp hóa RSA cho mỗi ứng dụng và trả về qua phương thức getOrigenJson() trong Purchase.
+
+- Để lấy được cặp khóa này, truy cập vào Play Console -> Services & API.
+
+<img src="img/b7.png"/>
+
+- Khi ứng dụng nhận được phản hồi đã ký này, bạn có thể sử dụng public key của cặp khóa RSA để xác minh chữ ký.
+
+- Hình thức xác minh này không thực sự an toàn vì logic của ứng dụng có thể bị dịch ngược và thay đổi.
+
+- Bạn nên làm xáo trộn khóa công khai Google Play và mã thanh toán Google Play để kẻ tấn công khó có thể thiết kế lại các giao thức bảo mật và các thành phần khác. Tối thiểu bạn nên chạy một công cụ mã hóa như Proguard:
+
+
+
+Ngoài ra các ứng dụng ngân hàng hoặc ví điện tử sẽ tích hợp thêm Google Safety Net. Nó sẽ check xem máy có bị root ko, nếu bị root thì sẽ không cho giao dịch.
 
 ### 8. Phương án cho các loại item
 
