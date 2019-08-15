@@ -85,7 +85,7 @@ Có thể chỉnh các thông số
 
 **Bước 1**: Thực hiện thêm code Google Billing vào app
 
-- Thêm dependency và quyn trong Manifest
+- Thêm dependency và quyền trong Manifest
 
 ```
   dependencies {
@@ -226,7 +226,13 @@ Thêm tài khoản Google test (thêm mail) và test trên các thiết bị đ�
 
 1. Gửi request mua hàng tới Google Play, qua hàm launchBillingFlow()
 
+Với sản phẩm one-time
+
 <img src="https://bangonews.files.wordpress.com/2015/09/google-play-launches-first-carrier-billing-in-africa-as-telkom-sa1.png"/>
+
+Sản phẩm subscription
+
+<img src="https://developer.android.com/images/google-play-billing/trivialdrive_purchase_sub.png"/>
 
 2. Google trả về thông tin purchase, trong đó có nhiều thông tin như token, time, order Id, ... thông qua hàm onPurchasesUpdated()
 
