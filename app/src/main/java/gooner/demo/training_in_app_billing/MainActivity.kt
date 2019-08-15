@@ -1,4 +1,4 @@
-package com.example.training_in_app_billing
+package gooner.demo.training_in_app_billing
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity(), PurchasesUpdatedListener {
         mGetBtn.setOnClickListener {
             onLoadProductClicked()
         }
+
     }
 
     private fun setUpBillingClient() {

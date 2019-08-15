@@ -1,4 +1,4 @@
-package com.example.training_in_app_billing
+package gooner.demo.training_in_app_billing
 
 import org.junit.Test
 
