@@ -226,7 +226,16 @@ Thêm tài khoản Google test (thêm mail) và test trên các thiết bị đ�
 
 1. Gửi request mua hàng tới Google Play, qua hàm launchBillingFlow()
 
+<img src="https://bangonews.files.wordpress.com/2015/09/google-play-launches-first-carrier-billing-in-africa-as-telkom-sa1.png"/>
+
 2. Google trả về thông tin purchase, trong đó có nhiều thông tin như token, time, order Id, ... thông qua hàm onPurchasesUpdated()
+
+
+```
+    override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
+       
+    }
+```
 
 ```
 {
