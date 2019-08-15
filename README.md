@@ -85,7 +85,7 @@ Có thể chỉnh các thông số
 
 **Bước 1**: Thực hiện thêm code Google Billing vào app
 
-- Thêm dependency và quyển trong Manifest
+- Thêm dependency và quyn trong Manifest
 
 ```
   dependencies {
@@ -137,6 +137,11 @@ Tạo sku param
  mSkuParam = SkuDetailsParams.newBuilder()
             // list to query
             .setSkusList(mListSku)
+            
+            // For subscription product
+            // .setType(BillingClient.SkuType.SUBS)  
+            
+            // For one-time and rewarded product
             .setType(BillingClient.SkuType.INAPP).build()
 ```
 
