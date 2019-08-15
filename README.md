@@ -85,7 +85,7 @@ Có thể chỉnh các thông số
 
 **Bước 1**: Thực hiện thêm code Google Billing vào app
 
-- Thêm dependency
+- Thêm dependency và quyển trong Manifest
 
 ```
   dependencies {
@@ -93,6 +93,10 @@ Có thể chỉnh các thông số
       implementation 'com.android.billingclient:billing:2.0.0'
   }
 
+```
+
+```
+    <uses-permission android:name="com.android.vending.BILLING"/>
 ```
 
 - Kết nối tới Google Play
