@@ -232,7 +232,7 @@ Với sản phẩm one-time
 
 Sản phẩm subscription
 
-<img src="https://developer.android.com/images/google-play-billing/trivialdrive_purchase_sub.png"/>
+   <img src="https://developer.android.com/images/google-play-billing/trivialdrive_purchase_sub.png" width="350"/>
 
 2. Google trả về thông tin purchase, trong đó có nhiều thông tin như token, time, order Id, ... thông qua hàm onPurchasesUpdated()
 
