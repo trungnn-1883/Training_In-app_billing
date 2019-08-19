@@ -85,7 +85,7 @@ Có thể chỉnh các thông số
 
 **Bước 1**: Thực hiện thêm code Google Billing vào app
 
-- Thêm dependency
+- Thêm dependency và quyền trong Manifest
 
 ```
   dependencies {
@@ -93,6 +93,10 @@ Có thể chỉnh các thông số
       implementation 'com.android.billingclient:billing:2.0.0'
   }
 
+```
+
+```
+    <uses-permission android:name="com.android.vending.BILLING"/>
 ```
 
 - Kết nối tới Google Play
@@ -133,6 +137,11 @@ Tạo sku param
  mSkuParam = SkuDetailsParams.newBuilder()
             // list to query
             .setSkusList(mListSku)
+            
+            // For subscription product
+            // .setType(BillingClient.SkuType.SUBS)  
+            
+            // For one-time and rewarded product
             .setType(BillingClient.SkuType.INAPP).build()
 ```
 
@@ -217,7 +226,22 @@ Thêm tài khoản Google test (thêm mail) và test trên các thiết bị đ�
 
 1. Gửi request mua hàng tới Google Play, qua hàm launchBillingFlow()
 
+Với sản phẩm one-time
+
+<img src="https://bangonews.files.wordpress.com/2015/09/google-play-launches-first-carrier-billing-in-africa-as-telkom-sa1.png"/>
+
+Sản phẩm subscription
+
+   <img src="https://developer.android.com/images/google-play-billing/trivialdrive_purchase_sub.png" width="350"/>
+
 2. Google trả về thông tin purchase, trong đó có nhiều thông tin như token, time, order Id, ... thông qua hàm onPurchasesUpdated()
+
+
+```
+    override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
+       
+    }
+```
 
 ```
 {
