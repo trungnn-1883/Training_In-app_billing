@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.android.billingclient.api.SkuDetails
 
-class SkuAdapter(val listSku: List<SkuDetails>, val onProductClicked: (SkuDetails) -> Unit) :
+class SkuAdapter(var listSku: List<SkuDetails>, val onProductClicked: (SkuDetails) -> Unit) :
     RecyclerView.Adapter<SkuAdapter.SkuViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkuViewHolder {
@@ -22,11 +22,16 @@ class SkuAdapter(val listSku: List<SkuDetails>, val onProductClicked: (SkuDetail
         }
     }
 
+    fun updateList(listSku: List<SkuDetails>) {
+        this.listSku = listSku
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = listSku.size
 
     override fun onBindViewHolder(holder: SkuViewHolder, position: Int) {
-        holder.mSkuTitleTv?.text = "Title: ${listSku[position].title} - Sku: ${listSku[position].sku}"
-        holder.mSkuPriceTv?.text = "Price: ${listSku[position].price}"
+        holder.mSkuTitleTv?.text = "Title: ${listSku[position].title} \nSku: ${listSku[position].sku}"
+        holder.mSkuPriceTv?.text = "Description: ${listSku[position].description} \nPrice: ${listSku[position].price}"
     }
 
     inner class SkuViewHolder(view: View) : RecyclerView.ViewHolder(view) {
